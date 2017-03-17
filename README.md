@@ -134,14 +134,14 @@ total.it = num.progams*cost.prog+food+travel; total.it
 ```
 cost.prog = Need to figure out what it will cost to train someone in all the programs (PBIS, Well Managed Schools, Second Step, SSIS SEL, Strong Teens)
 
-Installation - Management: Stipends for staff training for elementary
+Installation - Management: Stipends for staff training from coaches for elementary
 Total stipends for elementary staff: $33,824
 ```{r}
 num.staff = 14*8*2 
 num.hours.yearly.train = 4*4
 num.hours.coach = num.staff*9
 cost.staff = 15
-total.coel = num.hours.coach*cost.staff + num.staff*num.hours.yearly.train; total.coel
+total.trel = num.hours.coach*cost.staff + num.staff*num.hours.yearly.train; total.trel
 ```
 num.classes = There are 14 elementary schools with grades Pre-K through 6th and about two teachers per grade
 
@@ -151,7 +151,7 @@ num.hours = This is the number of hours each staff member will spend in training
 
 
 
-Installation - Management: Stipends for staff training for middle and high school
+Installation - Management: Stipends for staff training from coaches for middle and high school
 Total stipends for middle and high staff: $46,875
 ```{r}
 num.staff.mid = 15*3
@@ -159,7 +159,7 @@ num.staff.high = 20*4
 num.hours.coach = (num.staff.high+num.staff.mid)*9
 num.hours.yearly.train = 4*4*(num.staff.mid+num.staff.high)
 cost.staff = 15
-total.comh = num.hours.coach*cost.staff + num.hours.yearly.train*cost.staff; total.comh
+total.trmh = num.hours.coach*cost.staff + num.hours.yearly.train*cost.staff; total.trmh
 ```
 num.staff.mid = There are about 15 teachers who would receive training across 3 middle schools
 num.staff.high = There are about 20 teachers who would receive training across 2 middle schools
@@ -198,8 +198,30 @@ Here we are using the enroll scheme as with Mediciad where we are rolling out th
 
 This is an operating expensive need to get one year total 
 
+Coaches elementary
+Total Coaches elementary costs: $60,480
+```{r}
+num.staff = 14*8*2 
+num.hours.coach = num.staff*18
+cost.staff = 15
+total.coel = num.hours.coach*cost.staff; total.coel
+```
+num.classes = There are 14 elementary schools with grades Pre-K through 6th and about two teachers per grade
+
+num.hours = This is the number of hours each each coach will spend training so hour per month training and one hour per month
+
+Coaches for staff training from coaches for middle and high school
+Total Coaching for middle and high staff: $33,750
+```{r}
+num.staff.mid = 15*3
+num.staff.high = 20*4
+num.hours.coach = (num.staff.high+num.staff.mid)*18
+cost.staff = 15
+total.comh = num.hours.coach*cost.staff; total.comh
+```
 
 Interventionists (Tier 2 and 3 support)
+Total Interventionists costs: $405,506.2
 ```{r}
 hours = 15
 enrollTwo = (854 + 782 + 828 + 840 + 836 + 755 + 805 + 930)*.15
@@ -236,9 +258,9 @@ hours = We anticpate about 10 hours for each project
 overSight = For John Hitchcock to review and oversee the evaluation each year. 
 
 Total Cost for Building Business Skills for the Future Program
-Total Cost: $974,774
+Total Cost: $1,042,348
 ```{r}
-totalCosts = data.frame(total.con, total.town, total.climate, total.focus, total.teams, total.it, total.coel, total.comh, total.selcor, total.ssis, total.pan, total.interven, totalEval)
+totalCosts = data.frame(total.con, total.town, total.climate, total.focus, total.teams, total.it, total.coel, total.comh, total.selcor, total.ssis, total.pan, total.interven, totalEval, total.trel, total.trmh)
 totalCostsSum = rowSums(totalCosts); totalCostsSum
 ```
 
