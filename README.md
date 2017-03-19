@@ -16,14 +16,14 @@ Medicaid MCCSC
 Total Medcidad Reimbursements = $569,026
 ```{r}
 med = 610.91
-perct = .16*.25
+perct = .16*.15
 enrollTwo = 854 + 782 + 828 + 840 + 836 + 755 + 805 + 930
 enrollThree = enrollTwo + 801 + 923
-enrollFour = enrollTwo + 848 + 824
+enrollFour = enrollThree + 848 + 824
 yearTwo = perct*enrollTwo*med
 yearThree = perct*enrollThree*med
 yearFour = perct*enrollFour*med; yearFour
-total = yearTwo + yearThree + yearFour
+total = yearTwo* + yearThree + yearFour
 
 # https://eddataexpress.ed.gov/data-element-explorer.cfm/tab/map/deid/5/
 # https://compass.doe.in.gov/dashboard/enrollment.aspx?type=corp&id=5740
