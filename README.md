@@ -1,12 +1,15 @@
-# CGMCCSCBudget
 ---
-title: "CGBudget"
-output: html_document
+title: "MCCSC Lilly Budget"
+output:
+  word_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+Total Cost for Building Business Skills for the Future Program
+Total Cost: $1,042,348
 
 
 Medicaid MCCSC
@@ -69,30 +72,31 @@ years = number of years the event will take place
 
 
 Installation - Buy in: Town halls
-Total Town Hall Costs = $3,600
+Total Town Hall Costs = $2,700
 ```{r}
 food = 300
 num.staff = 3
 cost.staff = 20
 hours = 10
-years = 4
+years = 3
 total.town = (food+num.staff*cost.staff*hours)*years; total.town
 
 ```
-
+years = only have a town halls as a method for increasing buy in.  So only three years, because we are rolling out the program in three stages (7th, 9th, and Elementary, 8th and 10th, 11th and 12th)
 
 Installation - Buy in: climate survey
-Total cost of climate survey = $3,200
+Total cost of climate survey = $2,400
 ```{r}
 num.staff = 1
 hours = 20
 cost.staff = 20
 times  = 2
-years = 4
+years = 3
 total.climate = num.staff*hours*cost.staff*times*years; total.climate
 ```
 times =  is the number of times we conduct the survey which will be twice per year for the pre and post climate survey.
 
+years = only have a climate survey as a method for evaluating buy in.  So only three years, because we are rolling out the program in three stages (7th, 9th, and Elementary, 8th and 10th, 11th and 12th)
 
 Installation - Buy in: interviews / focus groups
 Total cost of focus groups = $1,500
@@ -106,103 +110,158 @@ hours.fg  = We are anticipating about 25 one foucs groups over the course of the
 
 
 
-Installation - Management: school based implementation teams
+Installation - Management: School based implementation teams stipends
+Total cost for stipends =  $75,600
 ```{r}
 num.staff = 7
 schools = 6
 hours = 30
 cost.staff = 15
 years = 4
-total.teams = num.staff*schools.dis*hours*cost.staff*years; total.teams
+total.teams = num.staff*schools*hours*cost.staff*years; total.teams
 ```
 Need to provide stipends to staff that are on the school and district teams
 
 schools = number of schools that will receive the stipends five three middle and two high schools
 
-Installation - Management: initial training
+Installation - Management: Training for SEL Coordinator
+Total training costs for SEL Coordinator: $16,000
 ```{r}
 num.progams = 5
 cost.prog = 3000
 food = 500
-staff = 100
-stipend = 50
-total.it = num.progams*cost.prog+staff*stipend; total.it
+travel = 500
+total.it = num.progams*cost.prog+food+travel; total.it
 ```
-trainer = the person who will adminstering the training.
-partic = the number of participants
-staff = the staff that will be working the event
+cost.prog = Need to figure out what it will cost to train someone in all the programs (PBIS, Well Managed Schools, Second Step, SSIS SEL, Strong Teens)
 
-SANDY WASHBURN swashbur@indiana.edu can provide training for PBIS and Second Steps program.
-Boys town = http://www.boystowntraining.org/well-managed-schools.html
-
-Maybe for strong teens and SSIS SEL PARCS needs to become experts and provide the training?
-
-
-Installation - Management: coaching elem
+Installation - Management: Stipends for staff training from coaches for elementary
+Total stipends for elementary staff: $33,824
 ```{r}
-num.classes = 20 
-num.hours = 30
-cost.staff = 20
-total.coel = num.classes*num.hours*cost.staff; total.coel
+num.staff = 14*8*2 
+num.hours.yearly.train = 4*num.staff
+num.hours.coach = num.staff*9
+cost.staff = 15
+total.trel = num.hours.coach*cost.staff + num.hours.yearly.train*cost.staff; total.trel
 ```
-el.num.coaches = number of coaches for the elemenatry schools.  Two coaches for the three programs (Well managed schools, PBIS, and Second steps)
+num.classes = There are 14 elementary schools with grades Pre-K through 6th and about two teachers per grade
 
-num.classes = number of classrooms implementing the programs
+num.hours.yearly.train = Each staff will receive four hours of training over four years as a their yearly training.
 
+num.hours = This is the number of hours each staff member will spend in training so one hour per month
 
+To get the cost of yearly stipends for trainings, add the second half of the total equations for ele and mid and high.
 
-Installation - Management: coaching middle high
+Installation - Management: Stipends for staff training from coaches for middle and high school
 ```{r}
-num.hours = 40*30
-cost.staff = 20
-total.comh = num.hours*cost.staff; total.coel
+num.staff.mid = 15*3
+num.staff.high = 20*4
+num.hours.coach = (num.staff.high+num.staff.mid)*9
+num.hours.yearly.train = 4*(num.staff.mid+num.staff.high)
+cost.staff = 15
+total.trmh = num.hours.coach*cost.staff + num.hours.yearly.train*cost.staff; total.trmh
 ```
-num.hours = Total number of hours needed is 40 classess and 20 hours per classroom
+num.staff.mid = There are about 15 teachers who would receive training across 3 middle schools
+num.staff.high = There are about 20 teachers who would receive training across 2 middle schools
+
+SEL Coordinator
+Total SEL Coordinator: $260,000
+```{r}
+cost = 65000
+years = 4
+total.selcor = cost*years; total.selcor
+```
 
 
-Initial Implementation: SSIS program
+Initial Implementation: SSIS SEL program
+Total cost of SSIS SEL: $48,240
 ```{r}
 cost.per.class = 268
-classes =  40
+classes =  45
 years = 4
 total.ssis = cost.per.class*classes*years;total.ssis
 
 ```
-This is an operating expensive need to get one year total 
+This is an operating expensive 
 
 Initial Implemenation: Panorama
+Total Cost Panorama: $34,929
 ```{r}
 cost.per.student = 1.5
-num.students = 5500
-years = 4
-total.pan = cost.per.student*num.students*years; total.pan
+enrollTwo = 854 + 782 + 828 + 840 + 836 + 755 + 805 + 930
+enrollThree = enrollTwo + 801 + 923
+enrollFour = enrollTwo + 848 + 824
+totalenroll = sum(enrollTwo, enrollThree, enrollFour)
+total.pan = cost.per.student*totalenroll; total.pan
 ```
+Here we are using the enroll scheme as with Mediciad where we are rolling out the universal assessments. 
+
 This is an operating expensive need to get one year total 
 
+Coaches elementary
+Total Coaches elementary costs: $60,480
+```{r}
+num.staff = 14*8*2 
+num.hours.coach = num.staff*18
+cost.staff = 15
+total.coel = num.hours.coach*cost.staff; total.coel
+```
+num.classes = There are 14 elementary schools with grades Pre-K through 6th and about two teachers per grade
+
+num.hours = This is the number of hours each each coach will spend training so hour per month training and one hour per month
+
+Coaches for staff training from coaches for middle and high school
+Total Coaching for middle and high staff: $33,750
+```{r}
+num.staff.mid = 15*3
+num.staff.high = 20*4
+num.hours.coach = (num.staff.high+num.staff.mid)*18
+cost.staff = 15
+total.comh = num.hours.coach*cost.staff; total.comh
+```
 
 Interventionists (Tier 2 and 3 support)
+Total Interventionists costs: $405,506.2
 ```{r}
-num.students = .20*1100
-hours = 30
-cost.staff = 20
-total.interven = num.students*hours*cost.staff; total.interven
+hours = 15
+enrollTwo = (854 + 782 + 828 + 840 + 836 + 755 + 805 + 930)*.15
+enrollThree = (enrollTwo + 801 + 923)*.15
+enrollFour = (enrollTwo + 848 + 824)*.15
+totalenroll = sum(enrollTwo, enrollThree, enrollFour)
+cost.staff = 15
+total.interven = totalenroll*hours*cost.staff; total.interven
 ```
-num.students = number of students that will need to served
+hours = this is the number hours we anticpate each interventionist working with the student.
 
-Assuming that we eventually serve 20% of the population with intensive services at least once.
-
+.15 is multiplied by each enrollment, because that is the percentage of students we anticpate to serve each year.
 
 This is an operating expensive need to get one year total 
 
 Evaluation
+Total Evaluation: $22,700
 ```{r}
-
+focusGroups = 3
+outputAnalyses = 2
+outcomeAnalyses = 2
+finalReports = 2
+hours = 10*(focusGroups+outputAnalyses+outcomeAnalyses+finalReports)
+costStaff = 15
+overSight = 5000
+totalEval = hours*costStaff*2 +(overSight*4); totalEval
 ```
 PARCS in conjunction with CEEP with provide the first two years of the evaluation for free and then CEEP will pick up the cost after the first two years.
 
-Total Cost
+outputAnalyses = Analyses related to the outputs that will be measured
+
+hours = We anticpate about 10 hours for each project
+
+overSight = For John Hitchcock to review and oversee the evaluation each year. 
+
+Total Cost for Building Business Skills for the Future Program
+Total Cost: $1,042,348
 ```{r}
-data.frame()
+totalCosts = data.frame(total.con, total.town, total.climate, total.focus, total.teams, total.it, total.coel, total.comh, total.selcor, total.ssis, total.pan, total.interven, totalEval, total.trel, total.trmh)
+totalCostsSum = rowSums(totalCosts); totalCostsSum
 ```
 
 
