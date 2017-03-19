@@ -177,11 +177,15 @@ Initial Implementation: SSIS SEL program
 Total cost of SSIS SEL: $48,240
 ```{r}
 cost.per.class = 268
-classes =  45
-years = 4
+classesYearTwo =  23
+classesYearThree = 23
+ssisYearTwo = cost.per.class*classesYearTwo
+ssisYearThree = ssisYearTwo + cost.per.class*classesYearThree
 total.ssis = cost.per.class*classes*years;total.ssis
 
 ```
+classesYearTwo = We will only be serving about 
+
 This is an operating expensive 
 
 Initial Implemenation: Panorama
@@ -189,8 +193,11 @@ Total Cost Panorama: $34,929
 ```{r}
 cost.per.student = 1.5
 enrollTwo = 854 + 782 + 828 + 840 + 836 + 755 + 805 + 930
+enrollTwoCost = enrollTwo*cost.per.student
 enrollThree = enrollTwo + 801 + 923
+enrollThreeCosts = enrollThree*cost.per.student
 enrollFour = enrollTwo + 848 + 824
+enrollFourCosts = enrollFour*cost.per.student
 totalenroll = sum(enrollTwo, enrollThree, enrollFour)
 total.pan = cost.per.student*totalenroll; total.pan
 ```
@@ -217,16 +224,21 @@ num.staff.mid = 15*3
 num.staff.high = 20*4
 num.hours.coach = (num.staff.high+num.staff.mid)*18
 cost.staff = 15
-total.comh = num.hours.coach*cost.staff; total.comh
+total.comh = num.hours.coach*cost.staff; total.comh/3
 ```
+total.comh = Need to divide total.comh by three, because we need to estimate the yearly cost.
+
 
 Interventionists (Tier 2 and 3 support)
 Total Interventionists costs: $405,506.2
 ```{r}
 hours = 15
 enrollTwo = (854 + 782 + 828 + 840 + 836 + 755 + 805 + 930)*.15
-enrollThree = (enrollTwo + 801 + 923)*.15
-enrollFour = (enrollTwo + 848 + 824)*.15
+enrollTwoCosts = enrollTwo*hours*cost.staff
+enrollThree = enrollTwo + (801 + 923)*.15
+enrollThreeCosts = enrollThree*hours*cost.staff
+enrollFour = enrollThree + (848 + 824)*.15
+enrollFourCosts = enrollFour*hours*cost.staff
 totalenroll = sum(enrollTwo, enrollThree, enrollFour)
 cost.staff = 15
 total.interven = totalenroll*hours*cost.staff; total.interven
@@ -247,7 +259,7 @@ finalReports = 2
 hours = 10*(focusGroups+outputAnalyses+outcomeAnalyses+finalReports)
 costStaff = 15
 overSight = 5000
-totalEval = hours*costStaff*2 +(overSight*4); totalEval
+totalEval = hours*costStaff +(overSight); totalEval
 ```
 PARCS in conjunction with CEEP with provide the first two years of the evaluation for free and then CEEP will pick up the cost after the first two years.
 
