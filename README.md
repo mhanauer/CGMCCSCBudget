@@ -242,7 +242,6 @@ yearTwoCosts = (num.staff.mid+num.staff.high)*numberHoursCoaching*cost.staff
 yearThreeCosts = (num.staff.mid+num.staff.high)*numberHoursCoaching*cost.staff
 yearFourCosts = (num.staff.high*2)*numberHoursCoaching*cost.staff
 
-total.comh = num.hours.coach*cost.staff; total.comh/3
 ```
 Strong Teens Book
 ```{r}
