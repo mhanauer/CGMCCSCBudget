@@ -159,10 +159,10 @@ cost = 15
 yearTwoStaff = highStaff+middleStaff
 totalYearTwoPD = yearTwoStaff*initial*cost
   
-yearThreeStaff = yearTwoStaff+highStaff+middleStaff
+yearThreeStaff = highStaff+middleStaff
 totalYearThreePD = yearThreeStaff*initial*cost
 
-yearFourStaff = yearThreeStaff+highStaff*2
+yearFourStaff = highStaff*2
 totalYearFourPD = yearFourStaff*initial*cost
 
 
@@ -217,24 +217,31 @@ enrollFour = enrollThree + the 11th and 12th graders, because there stuff is bei
 This is an operating expensive need to get one year total 
 
 Coaches elementary
-Total Coaches elementary costs: $60,480
 ```{r}
 num.staff = 14*8*2 
-num.hours.coach = num.staff*18
-cost.staff = 15
+num.hours.coach = num.staff*20
+cost.staff = round((55859/(52*40)))
 total.coel = num.hours.coach*cost.staff; total.coel
 ```
+
+
 num.classes = There are 14 elementary schools with grades Pre-K through 6th and about two teachers per grade
 
 num.hours = This is the number of hours each each coach will spend training so hour per month training and one hour per month
 
 Coaches for staff training from coaches for middle and high school
+
 Total Coaching for middle and high staff: $33,750
 ```{r}
-num.staff.mid = 15*3
-num.staff.high = 20*4
-num.hours.coach = (num.staff.high+num.staff.mid)*18/3
-cost.staff = (55859/(52*40))
+num.staff.mid = 15
+num.staff.high = 30
+numberHoursCoaching = 20
+cost.staff = round((55859/(52*40)))
+
+yearTwoCosts = (num.staff.mid+num.staff.high)*numberHoursCoaching*cost.staff
+yearThreeCosts = (num.staff.mid+num.staff.high)*numberHoursCoaching*cost.staff
+yearFourCosts = (num.staff.high*2)*numberHoursCoaching*cost.staff
+
 total.comh = num.hours.coach*cost.staff; total.comh/3
 ```
 Strong Teens Book
