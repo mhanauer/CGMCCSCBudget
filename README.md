@@ -52,14 +52,11 @@ total = Is the four total amount we can expect to see in Medicaid rembursements
 Installation - Buy in: Conference
 Total conference cost = $22,800
 ```{r}
-num.guest.speak = 4
-cost.guest.speak = 2000
+num.guest.speak = 2
+cost.guest.speak = 5000
+
 total.guest.speak = num.guest.speak*cost.guest.speak
 food = 500
-num.staff = 4
-cost.staff = 20
-hours = 15
-total.staff = num.staff*cost.staff*hours
 years = 4
 total.con = (total.guest.speak+total.staff+food)*years; total.con
 ```
@@ -74,20 +71,16 @@ years = number of years the event will take place
 
 
 Installation - Buy in: Town halls
-Total Town Hall Costs = $2,700
 ```{r}
-food = 300
-num.staff = 3
-cost.staff = 20
-hours = 10
-years = 3
-total.town = (food+num.staff*cost.staff*hours)*years; total.town
+people = 300
+costPerson = 10
+years = 4
+total.town = people*costPerson*years; total.town
 
 ```
 years = only have a town halls as a method for increasing buy in.  So only three years, because we are rolling out the program in three stages (7th, 9th, and Elementary, 8th and 10th, 11th and 12th)
 
-Installation - Buy in: climate survey
-Total cost of climate survey = $2,400
+Buy in: climate survey (PARCS provides)
 ```{r}
 num.staff = 1
 hours = 20
@@ -103,12 +96,13 @@ years = only have a climate survey as a method for evaluating buy in.  So only t
 Installation - Buy in: interviews / focus groups
 Total cost of focus groups = $1,500
 ```{r}
-staff = 5
-hours.fg = 75
+numFGs = 10
+hours.fg = 4
+years = 4
 cost.staff = 15
-total.focus =  staff*hours*cost.staff; total.focus 
+yearlyCost = numFGs*hours.fg*cost.staff
+total.focus =  numFGs*hours.fg*cost.staff*years; total.focus 
 ```
-hours.fg  = We are anticipating about 25 one foucs groups over the course of the implementation grant.  We are expecting one our of prepartion for each of the focus groups and one hour of analysis for each of them as well. 
 
 
 
@@ -117,17 +111,19 @@ Total cost for stipends =  $75,600
 ```{r}
 num.staff = 7
 schools = 6
-hours = 30
-cost.staff = 15
+hours = 9*3
+cost.staff = 20
 years = 4
 total.teams = num.staff*schools*hours*cost.staff*years; total.teams
 ```
 Need to provide stipends to staff that are on the school and district teams
 
+9 comes from the number of months
+
 schools = number of schools that will receive the stipends five three middle and two high schools
 
 Installation - Management: Training for SEL Coordinator
-Total training costs for SEL Coordinator: $16,000
+# Don't think we need this anymore find a person who knows these programs.
 ```{r}
 num.progams = 5
 cost.prog = 3000
@@ -138,7 +134,6 @@ total.it = num.progams*cost.prog+food+travel; total.it
 cost.prog = Need to figure out what it will cost to train someone in all the programs (PBIS, Well Managed Schools, Second Step, SSIS SEL, Strong Teens)
 
 Installation - Management: Stipends for staff training from coaches for elementary
-Total stipends for elementary staff: $33,824
 ```{r}
 num.staff = 14*8*2 
 num.hours.yearly.train = 4*num.staff
@@ -156,15 +151,24 @@ To get the cost of yearly stipends for trainings, add the second half of the tot
 
 Installation - Management: Stipends for staff training from coaches for middle and high school
 ```{r}
-num.staff.mid = 15*3
-num.staff.high = 20*4
-num.hours.coach = (num.staff.high+num.staff.mid)*9
-num.hours.yearly.train = 4*(num.staff.mid+num.staff.high)
-cost.staff = 15
-total.trmh = num.hours.coach*cost.staff + num.hours.yearly.train*cost.staff; total.trmh
+highStaff = 20
+middleStaff = 15
+initial = 4
+cost = 15
+
+yearTwoStaff = highStaff+middleStaff
+totalYearTwoPD = yearTwoStaff*initial*cost
+  
+yearThreeStaff = yearTwoStaff+highStaff+middleStaff
+totalYearThreePD = yearThreeStaff*initial*cost
+
+yearFourStaff = yearThreeStaff+highStaff*2
+totalYearFourPD = yearFourStaff*initial*cost
+
+
 ```
 num.staff.mid = There are about 15 teachers who would receive training across 3 middle schools
-num.staff.high = There are about 20 teachers who would receive training across 2 middle schools
+num.staff.high = There are about 30 (twice as many grades) teachers who would receive training across 2 middle schools
 
 SEL Coordinator
 Total SEL Coordinator: $260,000
@@ -176,7 +180,6 @@ total.selcor = cost*years; total.selcor
 
 
 Initial Implementation: SSIS SEL program
-Total cost of SSIS SEL: $48,240
 ```{r}
 cost.per.class = 268/ 25
 classesYearTwo = 930 + 805
@@ -184,21 +187,32 @@ classesYearThree = classesYearTwo + 801
 ssisYearTwo = cost.per.class*classesYearTwo
 ssisYearThree = ssisYearTwo + cost.per.class*classesYearThree
 ssisYearFour = ssisYearThree
-total.ssis = ssisYearTwo+ssisYearThree+ssisYearFour;total.ssis
+total.ssis = round(ssisYearTwo+ssisYearThree+ssisYearFour);total.ssis
 ```
 classesYearTwo = We will only be serving about 
 
 This is an operating expensive 
 
-Initial Implemenation: Panorama
-Total Cost Panorama: $34,929
+Aperture education
 ```{r}
-cost.per.student = 1.5
-enroll = 854 + 782 + 828 + 840 + 836 + 755 + 805 + 930
+cost.per.student = 3.5
+enrollTwo = 288 + 798 + 854 + 782 + 828 + 840 + 836 + 755 + 805 + 930
+totalYearTwo = enrollTwo*cost.per.student
+
+enrollThree = enrollTwo + 801
+totalYearThree = enrollThree*cost.per.student
+
+enrollFour = enrollThree + 848 + 824
+totalYearFour = enrollFour*cost.per.student
+
 years = 4
 total.pan = cost.per.student*enroll*years; total.pan
 ```
-Here we are using the enroll scheme as with Mediciad where we are rolling out the universal assessments. 
+enrollTwo = This will be pre-k through 6th, because we are using the universal screener for all the elementary students.
+
+enrollThree  = enrollTwo + the 10th graders, because SSIS SEL no longer applies to 10th graders.
+
+enrollFour = enrollThree + the 11th and 12th graders, because there stuff is being rolled out.
 
 This is an operating expensive need to get one year total 
 
@@ -223,6 +237,12 @@ num.hours.coach = (num.staff.high+num.staff.mid)*18/3
 cost.staff = (55859/(52*40))
 total.comh = num.hours.coach*cost.staff; total.comh/3
 ```
+Strong Teens Book
+```{r}
+book = 32
+```
+Only need one book, because the SEL coordinator will create trainings from the book.
+
 Divide the num.hours.coach by three, because you want to estimate the hours over three years for the budget.
 
 cost.staff = http://www1.salary.com/IN/Social-Worker-MSW-salary.html 
@@ -233,23 +253,25 @@ total.comh = Need to divide total.comh by three, because we need to estimate the
 Interventionists (Tier 2 and 3 support)
 Total Interventionists costs: $405,506.2
 ```{r}
-hours = 14
+hours = 21
 cost.staff = 15
-enrollTwoTwo = ((288 + 798 + 854 + 782 + 828 + 840 + 836 + 755 + 805 + 930)*.10)/5
-enrollTwoThree = ((288 + 798 + 854 + 782 + 828 + 840 + 836 + 755 + 805 + 930)*.05)
+tierTwo = .05
+tierThree =  .025 
+enrollTwoTwo = round(((288 + 798 + 854 + 782 + 828 + 840 + 836 + 755 + 805 + 930)*tierTwo)/5)
+enrollTwoThree = round(((288 + 798 + 854 + 782 + 828 + 840 + 836 + 755 + 805 + 930)*tierThree))
 enrollTwoTwoCosts = enrollTwoTwo*hours*cost.staff
 enrollTwoThreeCosts = enrollTwoThree*cost.staff*hours
 yearTwoCosts = enrollTwoThreeCosts+enrollTwoTwoCosts
 
-enrollThreeTwo = enrollTwoTwo + ((801 + 923)*.1 / 5)
-enrollThreeThree = enrollTwoThree + (801 + 923)*.05
+enrollThreeTwo = round(enrollTwoTwo + ((801 + 923)*tierTwo / 5))
+enrollThreeThree = round(enrollTwoThree + (801 + 923)*tierThree)
 # If you wanted to add a reduction in 5% you would take enrollTwo * .95
 enrollThreeTwoCosts = enrollThreeTwo*hours*cost.staff
 enrollThreeThreeCosts = enrollThreeThree*hours*cost.staff
 yearThreeCosts = enrollThreeTwoCosts + enrollThreeThreeCosts
 
-enrollFourTwo = enrollThreeTwo + ((848 + 824)*.1 / 5)
-enrollFourThree = enrollThreeThree + (848 + 824)*.05
+enrollFourTwo = round(enrollThreeTwo + ((848 + 824)*tierTwo / 5))
+enrollFourThree = round(enrollThreeThree + (848 + 824)*tierThree)
 # If you wanted to add a reduction in 5% you would take enrollTwo * .95
 enrollFourTwoCosts = enrollFourTwo*hours*cost.staff
 enrollThreeThreeCosts = enrollFourThree*hours*cost.staff
@@ -270,7 +292,9 @@ totalFourHours = round(enrollFourTwoHours+enrollFourThreeHours)
 
 total.interven = yearFourCosts + yearThreeCosts + yearTwoCosts; total.interven
 ```
-enrollTwoTwo = .10 of the population will be small groups of five students.  The other five percent will be intensive tier three services.
+This is assuming no help from anyone at MCCSC.
+
+enrollTwoTwo = .10 of the population will be small groups of five students; however, referral system is only about 50% accuracte.  The 2.5% percent will be intensive tier three services.
 
 Remember that you are dividing by 5, because for tier two services you are providing groups of five services.
 
