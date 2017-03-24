@@ -16,7 +16,8 @@ Medicaid MCCSC
 Total Medcidad Reimbursements = $569,026
 ```{r}
 med = 610.91
-perct = .16*.25
+perct = .16*.15
+preK = 288; k = 798; first = 854; second = 782; third = 828; fourth = 840; fifth  = 836; sixth = 755; seventh = 805; eigth = 801; ninth = 930; tenth = 923; eleventh = 848; twelveth = 824 
 enrollTwo = round(288 + 798 + 854 + 782 + 828 + 840 + 836 + 755 + 805 + 930)
 enrollThree = round(enrollTwo + 801 + 923)
 enrollFour = round(enrollThree + 848 + 824)
@@ -32,7 +33,7 @@ med = The amount of extra unrestricted funds that a district receives per studen
 
 In this model I am assuming that kids who have an IEP with SEL will have it each year.  I am assuming that about 2.4% new IEP's will be present each for the population that is being assesed.  The new screeners will produce 2.4%
 
-perct = .16 of Indiana students have IEP's.  Given the strong correlation between academic and SEL outcomes we are assuming that about .25 of those IEP students will identified as needing to include an SEL problem in their IEP making their SEL services eligible for Mediciad reminbursement.
+Teacher referral systems only get about half of students, but we have a stronger teacher referral systems and we have social workers who also look at IEP students for social issues and parents involved in the referral system therefore we are only anctipating that we have missed about 15% of the IEP students who need 
 
 enrollTwo = This is the student populations for the grades that will be included in the second year of the program where universal assessments will be conducted (7th, 9th, and 1st through 6th)
 
@@ -47,6 +48,61 @@ yearThree = Same as yearTwo, but with the numbers for year three
 yearFour = Same yearThree, but with the numbers for year four
 
 total = Is the four total amount we can expect to see in Medicaid rembursements
+
+Interventionists (Tier 2 and 3 support)
+Total Interventionists costs: $405,506.2
+```{r}
+hours = 21
+cost.staff = 15
+tierTwo = .05
+tierThree =  .025
+preK = 288; k = 798; first = 854; second = 782; third = 828; fourth = 840; fifth  = 836; sixth = 755; seventh = 805; eigth = 801; ninth = 930; tenth = 923; eleventh = 848; twelveth = 824    
+enrollTwoTwo = round(((preK + k + first + seventh + ninth)*tierTwo)/5)
+enrollTwoThree = round((preK + k + first + seventh + ninth)*tierThree)
+enrollTwoTwoCosts = enrollTwoTwo*hours*cost.staff
+enrollTwoThreeCosts = enrollTwoThree*cost.staff*hours
+yearTwoCosts = enrollTwoThreeCosts+enrollTwoTwoCosts
+
+enrollThreeTwo = round(((second + third + fourth + eigth + tenth)*tierTwo / 5))
+enrollThreeThree = round((second + third + fourth + eigth + tenth)*tierThree)
+enrollThreeTwoCosts = enrollThreeTwo*hours*cost.staff
+enrollThreeThreeCosts = enrollThreeThree*hours*cost.staff
+yearThreeCosts = enrollThreeTwoCosts + enrollThreeThreeCosts
+
+enrollFourTwo = round(((fifth + sixth + eleventh + twelveth)*tierTwo / 5))
+enrollFourThree = round((fifth + sixth + eleventh + twelveth)*tierThree)
+enrollFourTwoCosts = enrollFourTwo*hours*cost.staff
+enrollThreeThreeCosts = enrollFourThree*hours*cost.staff
+yearFourCosts = enrollFourTwoCosts + enrollThreeThreeCosts
+
+# Getting the number of hours worked here
+enrollTwoTwoHours = enrollTwoTwo*hours
+enrollTwoThreeHours = enrollTwoThree*hours
+totalTwoHours = round(enrollTwoTwoHours+enrollTwoThreeHours)
+
+enrollThreeTwoHours =  enrollThreeTwo*hours
+enrollThreeThreeHours = enrollThreeThree*hours
+totalThreeHours = round(enrollThreeTwoHours+enrollThreeThreeHours)
+
+enrollFourTwoHours = enrollFourTwo*hours
+enrollFourThreeHours = enrollFourThree*hours
+totalFourHours = round(enrollFourTwoHours+enrollFourThreeHours)
+
+total.interven = yearFourCosts + yearThreeCosts + yearTwoCosts; total.interven
+```
+This is assuming no help from anyone at MCCSC.
+
+enrollTwoTwo = .10 of the population will be small groups of five students; however, referral system is only about 50% accuracte.  The 2.5% percent will be intensive tier three services.
+
+Remember that you are dividing by 5, because for tier two services you are providing groups of five services.
+
+enrollTwoThree= .05 of the population will be intensive one on one services.
+
+hours = this is the number hours we anticpate each interventionist working with the student.
+
+.15 is multiplied by each enrollment, because that is the percentage of students we anticpate to serve each year.
+
+This is an operating expensive need to get one year total 
 
 
 Installation - Buy in: Conference
@@ -255,62 +311,6 @@ cost.staff = http://www1.salary.com/IN/Social-Worker-MSW-salary.html
 
 total.comh = Need to divide total.comh by three, because we need to estimate the yearly cost, 
 
-
-Interventionists (Tier 2 and 3 support)
-Total Interventionists costs: $405,506.2
-```{r}
-hours = 21
-cost.staff = 15
-tierTwo = .05
-tierThree =  .025 
-enrollTwoTwo = round(((288 + 798 + 854 + 782 + 828 + 840 + 836 + 755 + 805 + 930)*tierTwo)/5)
-enrollTwoThree = round(((288 + 798 + 854 + 782 + 828 + 840 + 836 + 755 + 805 + 930)*tierThree))
-enrollTwoTwoCosts = enrollTwoTwo*hours*cost.staff
-enrollTwoThreeCosts = enrollTwoThree*cost.staff*hours
-yearTwoCosts = enrollTwoThreeCosts+enrollTwoTwoCosts
-
-enrollThreeTwo = round(enrollTwoTwo + ((801 + 923)*tierTwo / 5))
-enrollThreeThree = round(enrollTwoThree + (801 + 923)*tierThree)
-# If you wanted to add a reduction in 5% you would take enrollTwo * .95
-enrollThreeTwoCosts = enrollThreeTwo*hours*cost.staff
-enrollThreeThreeCosts = enrollThreeThree*hours*cost.staff
-yearThreeCosts = enrollThreeTwoCosts + enrollThreeThreeCosts
-
-enrollFourTwo = round(enrollThreeTwo + ((848 + 824)*tierTwo / 5))
-enrollFourThree = round(enrollThreeThree + (848 + 824)*tierThree)
-# If you wanted to add a reduction in 5% you would take enrollTwo * .95
-enrollFourTwoCosts = enrollFourTwo*hours*cost.staff
-enrollThreeThreeCosts = enrollFourThree*hours*cost.staff
-yearFourCosts = enrollFourTwoCosts + enrollThreeThreeCosts
-
-# Getting the number of hours worked here
-enrollTwoTwoHours = enrollTwoTwo*hours
-enrollTwoThreeHours = enrollTwoThree*hours
-totalTwoHours = round(enrollTwoTwoHours+enrollTwoThreeHours)
-
-enrollThreeTwoHours =  enrollThreeTwo*hours
-enrollThreeThreeHours = enrollThreeThree*hours
-totalThreeHours = round(enrollThreeTwoHours+enrollThreeThreeHours)
-
-enrollFourTwoHours = enrollFourTwo*hours
-enrollFourThreeHours = enrollFourThree*hours
-totalFourHours = round(enrollFourTwoHours+enrollFourThreeHours)
-
-total.interven = yearFourCosts + yearThreeCosts + yearTwoCosts; total.interven
-```
-This is assuming no help from anyone at MCCSC.
-
-enrollTwoTwo = .10 of the population will be small groups of five students; however, referral system is only about 50% accuracte.  The 2.5% percent will be intensive tier three services.
-
-Remember that you are dividing by 5, because for tier two services you are providing groups of five services.
-
-enrollTwoThree= .05 of the population will be intensive one on one services.
-
-hours = this is the number hours we anticpate each interventionist working with the student.
-
-.15 is multiplied by each enrollment, because that is the percentage of students we anticpate to serve each year.
-
-This is an operating expensive need to get one year total 
 
 Evaluation
 ```{r}
