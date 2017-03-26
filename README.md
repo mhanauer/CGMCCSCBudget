@@ -63,14 +63,15 @@ enrollTwoTwoCosts = enrollTwoTwo*hours*cost.staff
 enrollTwoThreeCosts = enrollTwoThree*cost.staff*hours
 yearTwoCosts = enrollTwoThreeCosts+enrollTwoTwoCosts
 
-enrollThreeTwo = round(((second + third + fourth + eighth  + tenth)*tierTwo / 5))
-enrollThreeThree = round((second + third + fourth + eighth  + tenth)*tierThree)
+enrollThreeTwo = round(enrollTwoTwo + (second + third + fourth + eighth  + tenth)*tierTwo / 5)
+enrollThreeThree = round(enrollTwoThree + (second + third + fourth + eighth  + tenth)*tierThree)
 enrollThreeTwoCosts = enrollThreeTwo*hours*cost.staff
 enrollThreeThreeCosts = enrollThreeThree*hours*cost.staff
 yearThreeCosts = enrollThreeTwoCosts + enrollThreeThreeCosts
-
-enrollFourTwo = round(((fifth + sixth + eleventh + twelfth)*tierTwo / 5))
-enrollFourThree = round((fifth + sixth + eleventh + twelfth)*tierThree)
+# Remember that you will still be serving tier two students in year three students in year four, but not year two tier students, because they have been phased out. 
+enrollFourTwo = round(((second + third + fourth + eighth  + tenth+fifth + sixth + eleventh + twelfth)*tierTwo / 5))
+# Here remember that we are not expecting changes in tier three students so we can use the enrollment from tier three from year three.
+enrollFourThree = round(enrollThreeThree+ (fifth + sixth + eleventh + twelfth)*tierThree)
 enrollFourTwoCosts = enrollFourTwo*hours*cost.staff
 enrollThreeThreeCosts = enrollFourThree*hours*cost.staff
 yearFourCosts = enrollFourTwoCosts + enrollThreeThreeCosts
@@ -90,6 +91,8 @@ totalFourHours = round(enrollFourTwoHours+enrollFourThreeHours)
 
 total.interven = yearFourCosts + yearThreeCosts + yearTwoCosts; total.interven
 ```
+Assuming that you will only see the reductions in tier two students at the end of year three therefore, costs won't go down until year four.
+
 This is assuming no help from anyone at MCCSC.
 
 enrollTwoTwo = .10 of the population will be small groups of five students; however, referral system is only about 50% accuracte.  The 2.5% percent will be intensive tier three services.
@@ -163,7 +166,7 @@ total.focus =  numFGs*hours.fg*cost.staff*years; total.focus
 
 
 Installation - Management: School based implementation teams stipends
-Total cost for stipends =  $75,600
+
 ```{r}
 num.staff = 7
 schools = 6
@@ -177,17 +180,6 @@ Need to provide stipends to staff that are on the school and district teams
 9 comes from the number of months
 
 schools = number of schools that will receive the stipends five three middle and two high schools
-
-Installation - Management: Training for SEL Coordinator
-# Don't think we need this anymore find a person who knows these programs.
-```{r}
-num.progams = 5
-cost.prog = 3000
-food = 500
-travel = 500
-total.it = num.progams*cost.prog+food+travel; total.it
-```
-cost.prog = Need to figure out what it will cost to train someone in all the programs (PBIS, Well Managed Schools, Second Step, SSIS SEL, Strong Teens)
 
 Installation - Management: Stipends for staff training from coaches for elementary
 ```{r}
@@ -256,15 +248,12 @@ preK = 288; k = 798; first = 854; second = 782; third = 828; fourth = 840; fifth
 cost.per.student = 3.5
 
 enrollTwo = preK + k + first
-
 totalYearTwo = enrollTwo*cost.per.student
 
 enrollThree = enrollTwo + second + third + fourth + tenth
-
 totalYearThree = enrollThree*cost.per.student
 
 enrollFour = enrollThree + fifth + sixth + eleventh + twelfth
-
 totalYearFour = enrollFour*cost.per.student
 
 years = 4
@@ -278,14 +267,16 @@ enrollFour = enrollThree + the 11th and 12th graders, because there stuff is bei
 
 This is an operating expensive need to get one year total 
 
-Coaches elementary
+Coaches 
 ```{r}
-num.staff = 14*8*2 
-num.hours.coach = num.staff*20
-cost.staff = round((55859/(52*40)))
-total.coel = num.hours.coach*cost.staff; total.coel
-```
+teachers = 50
+cost = 27
+hours = 20
+totalCosts = teachers*cost*hours
 
+
+```
+yearTwoCoaches = assuming two teachers per grade for elementary with 14 schools so 21 here and 5 teachers for middle schools so 10 here totaling 31
 
 num.classes = There are 14 elementary schools with grades Pre-K through 6th and about two teachers per grade
 
