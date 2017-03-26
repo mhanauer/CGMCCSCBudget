@@ -1,33 +1,39 @@
-# CGMCCSCBudget
 ---
-title: "CGBudget"
-output: html_document
+title: "MCCSC Lilly Budget"
+output:
+  word_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+Total Cost for Building Business Skills for the Future Program
+Total Cost: $1,042,348
 
 
 Medicaid MCCSC
 Total Medcidad Reimbursements = $569,026
 ```{r}
 med = 610.91
-perct = .16*.25
-enrollTwo = 854 + 782 + 828 + 840 + 836 + 755 + 805 + 930
-enrollThree = enrollTwo + 801 + 923
-enrollFour = enrollTwo + 848 + 824
-yearTwo = perct*enrollTwo*med
-yearThree = perct*enrollThree*med
-yearFour = perct*enrollFour*med; yearFour
-total = yearTwo + yearThree + yearFour
+perct = .16*.15
+preK = 288; k = 798; first = 854; second = 782; third = 828; fourth = 840; fifth  = 836; sixth = 755; seventh = 805; eighth  = 801; ninth = 930; tenth = 923; eleventh = 848; twelfth = 824 
+enrollTwo = round(288 + 798 + 854 + 782 + 828 + 840 + 836 + 755 + 805 + 930)
+enrollThree = round(enrollTwo + 801 + 923)
+enrollFour = round(enrollThree + 848 + 824)
+yearTwo = round(perct*enrollTwo*med)
+yearThree = round(perct*enrollThree*med)
+yearFour = round(perct*enrollFour*med)
+total = round(yearTwo + yearThree + yearFour)
 
 # https://eddataexpress.ed.gov/data-element-explorer.cfm/tab/map/deid/5/
 # https://compass.doe.in.gov/dashboard/enrollment.aspx?type=corp&id=5740
 ```
 med = The amount of extra unrestricted funds that a district receives per student.
 
-perct = .16 of Indiana students have IEP's.  Given the strong correlation between academic and SEL outcomes we are assuming that about .25 of those IEP students will identified as needing to include an SEL problem in their IEP making their SEL services eligible for Mediciad reminbursement.
+In this model I am assuming that kids who have an IEP with SEL will have it each year.  I am assuming that about 2.4% new IEP's will be present each for the population that is being assesed.  The new screeners will produce 2.4%
+
+Teacher referral systems only get about half of students, but we have a stronger teacher referral systems and we have social workers who also look at IEP students for social issues and parents involved in the referral system therefore we are only anctipating that we have missed about 15% of the IEP students who need 
 
 enrollTwo = This is the student populations for the grades that will be included in the second year of the program where universal assessments will be conducted (7th, 9th, and 1st through 6th)
 
@@ -43,18 +49,70 @@ yearFour = Same yearThree, but with the numbers for year four
 
 total = Is the four total amount we can expect to see in Medicaid rembursements
 
+Interventionists (Tier 2 and 3 support)
+Total Interventionists costs: $405,506.2
+```{r}
+hours = 21
+cost.staff = 15
+tierTwo = .05
+tierThree =  .025
+preK = 288; k = 798; first = 854; second = 782; third = 828; fourth = 840; fifth  = 836; sixth = 755; seventh = 805; eighth  = 801; ninth = 930; tenth = 923; eleventh = 848; twelfth = 824    
+enrollTwoTwo = round(((preK + k + first + seventh + ninth)*tierTwo)/5)
+enrollTwoThree = round((preK + k + first + seventh + ninth)*tierThree)
+enrollTwoTwoCosts = enrollTwoTwo*hours*cost.staff
+enrollTwoThreeCosts = enrollTwoThree*cost.staff*hours
+yearTwoCosts = enrollTwoThreeCosts+enrollTwoTwoCosts
+
+enrollThreeTwo = round(((second + third + fourth + eighth  + tenth)*tierTwo / 5))
+enrollThreeThree = round((second + third + fourth + eighth  + tenth)*tierThree)
+enrollThreeTwoCosts = enrollThreeTwo*hours*cost.staff
+enrollThreeThreeCosts = enrollThreeThree*hours*cost.staff
+yearThreeCosts = enrollThreeTwoCosts + enrollThreeThreeCosts
+
+enrollFourTwo = round(((fifth + sixth + eleventh + twelfth)*tierTwo / 5))
+enrollFourThree = round((fifth + sixth + eleventh + twelfth)*tierThree)
+enrollFourTwoCosts = enrollFourTwo*hours*cost.staff
+enrollThreeThreeCosts = enrollFourThree*hours*cost.staff
+yearFourCosts = enrollFourTwoCosts + enrollThreeThreeCosts
+
+# Getting the number of hours worked here
+enrollTwoTwoHours = enrollTwoTwo*hours
+enrollTwoThreeHours = enrollTwoThree*hours
+totalTwoHours = round(enrollTwoTwoHours+enrollTwoThreeHours)
+
+enrollThreeTwoHours =  enrollThreeTwo*hours
+enrollThreeThreeHours = enrollThreeThree*hours
+totalThreeHours = round(enrollThreeTwoHours+enrollThreeThreeHours)
+
+enrollFourTwoHours = enrollFourTwo*hours
+enrollFourThreeHours = enrollFourThree*hours
+totalFourHours = round(enrollFourTwoHours+enrollFourThreeHours)
+
+total.interven = yearFourCosts + yearThreeCosts + yearTwoCosts; total.interven
+```
+This is assuming no help from anyone at MCCSC.
+
+enrollTwoTwo = .10 of the population will be small groups of five students; however, referral system is only about 50% accuracte.  The 2.5% percent will be intensive tier three services.
+
+Remember that you are dividing by 5, because for tier two services you are providing groups of five services.
+
+enrollTwoThree= .05 of the population will be intensive one on one services.
+
+hours = this is the number hours we anticpate each interventionist working with the student.
+
+.15 is multiplied by each enrollment, because that is the percentage of students we anticpate to serve each year.
+
+This is an operating expensive need to get one year total 
+
 
 Installation - Buy in: Conference
 Total conference cost = $22,800
 ```{r}
-num.guest.speak = 4
-cost.guest.speak = 1000
+num.guest.speak = 2
+cost.guest.speak = 5000
+
 total.guest.speak = num.guest.speak*cost.guest.speak
 food = 500
-num.staff = 4
-cost.staff = 20
-hours = 15
-total.staff = num.staff*cost.staff*hours
 years = 4
 total.con = (total.guest.speak+total.staff+food)*years; total.con
 ```
@@ -69,141 +127,264 @@ years = number of years the event will take place
 
 
 Installation - Buy in: Town halls
-Total Town Hall Costs = $3,600
 ```{r}
-food = 300
-num.staff = 3
-cost.staff = 20
-hours = 10
+people = 300
+costPerson = 10
 years = 4
-total.town = (food+num.staff*cost.staff*hours)*years; total.town
+total.town = people*costPerson*years; total.town
 
 ```
+years = only have a town halls as a method for increasing buy in.  So only three years, because we are rolling out the program in three stages (7th, 9th, and Elementary, 8th and 10th, 11th and 12th)
 
-
-Installation - Buy in: climate survey
-Total cost of climate survey = $3,200
+Buy in: climate survey (PARCS provides)
 ```{r}
 num.staff = 1
 hours = 20
 cost.staff = 20
 times  = 2
-years = 4
+years = 3
 total.climate = num.staff*hours*cost.staff*times*years; total.climate
 ```
 times =  is the number of times we conduct the survey which will be twice per year for the pre and post climate survey.
 
+years = only have a climate survey as a method for evaluating buy in.  So only three years, because we are rolling out the program in three stages (7th, 9th, and Elementary, 8th and 10th, 11th and 12th)
 
 Installation - Buy in: interviews / focus groups
 Total cost of focus groups = $1,500
 ```{r}
-staff = 5
-hours.fg = 75
+numFGs = 10
+hours.fg = 4
+years = 4
 cost.staff = 15
-total.focus =  staff*hours*cost.staff; total.focus 
+yearlyCost = numFGs*hours.fg*cost.staff
+total.focus =  numFGs*hours.fg*cost.staff*years; total.focus 
 ```
-hours.fg  = We are anticipating about 25 one foucs groups over the course of the implementation grant.  We are expecting one our of prepartion for each of the focus groups and one hour of analysis for each of them as well. 
 
 
 
-Installation - Management: school based implementation teams
+Installation - Management: School based implementation teams stipends
+Total cost for stipends =  $75,600
 ```{r}
 num.staff = 7
 schools = 6
-hours = 30
-cost.staff = 15
+hours = 9*3
+cost.staff = 20
 years = 4
-total.teams = num.staff*schools.dis*hours*cost.staff*years; total.teams
+total.teams = num.staff*schools*hours*cost.staff*years; total.teams
 ```
 Need to provide stipends to staff that are on the school and district teams
 
+9 comes from the number of months
+
 schools = number of schools that will receive the stipends five three middle and two high schools
 
-Installation - Management: initial training
+Installation - Management: Training for SEL Coordinator
+# Don't think we need this anymore find a person who knows these programs.
 ```{r}
 num.progams = 5
 cost.prog = 3000
 food = 500
-staff = 100
-stipend = 50
-total.it = num.progams*cost.prog+staff*stipend; total.it
+travel = 500
+total.it = num.progams*cost.prog+food+travel; total.it
 ```
-trainer = the person who will adminstering the training.
-partic = the number of participants
-staff = the staff that will be working the event
+cost.prog = Need to figure out what it will cost to train someone in all the programs (PBIS, Well Managed Schools, Second Step, SSIS SEL, Strong Teens)
 
-SANDY WASHBURN swashbur@indiana.edu can provide training for PBIS and Second Steps program.
-Boys town = http://www.boystowntraining.org/well-managed-schools.html
-
-Maybe for strong teens and SSIS SEL PARCS needs to become experts and provide the training?
-
-
-Installation - Management: coaching elem
+Installation - Management: Stipends for staff training from coaches for elementary
 ```{r}
-num.classes = 20 
-num.hours = 30
-cost.staff = 20
-total.coel = num.classes*num.hours*cost.staff; total.coel
+num.staff = 14*8*2 
+num.hours.yearly.train = 4*num.staff
+num.hours.coach = num.staff*9
+cost.staff = 15
+total.trel = num.hours.coach*cost.staff + num.hours.yearly.train*cost.staff; total.trel
 ```
-el.num.coaches = number of coaches for the elemenatry schools.  Two coaches for the three programs (Well managed schools, PBIS, and Second steps)
+num.classes = There are 14 elementary schools with grades Pre-K through 6th and about two teachers per grade
 
-num.classes = number of classrooms implementing the programs
+num.hours.yearly.train = Each staff will receive four hours of training over four years as a their yearly training.
 
+num.hours = This is the number of hours each staff member will spend in training so one hour per month
 
+To get the cost of yearly stipends for trainings, add the second half of the total equations for ele and mid and high.
 
-Installation - Management: coaching middle high
+Installation - Management: Stipends for staff training from coaches for middle and high school
 ```{r}
-num.hours = 40*30
-cost.staff = 20
-total.comh = num.hours*cost.staff; total.coel
+highStaff = 20
+middleStaff = 15
+initial = 4
+cost = 15
+
+yearTwoStaff = highStaff+middleStaff
+totalYearTwoPD = yearTwoStaff*initial*cost
+  
+yearThreeStaff = highStaff+middleStaff
+totalYearThreePD = yearThreeStaff*initial*cost
+
+yearFourStaff = highStaff*2
+totalYearFourPD = yearFourStaff*initial*cost
+
+
 ```
-num.hours = Total number of hours needed is 40 classess and 20 hours per classroom
+num.staff.mid = There are about 15 teachers who would receive training across 3 middle schools
+num.staff.high = There are about 30 (twice as many grades) teachers who would receive training across 2 middle schools
 
-
-Initial Implementation: SSIS program
+SEL Coordinator
+Total SEL Coordinator: $260,000
 ```{r}
-cost.per.class = 268
-classes =  40
+cost = 65000
 years = 4
-total.ssis = cost.per.class*classes*years;total.ssis
-
+total.selcor = cost*years; total.selcor
 ```
-This is an operating expensive need to get one year total 
 
-Initial Implemenation: Panorama
+
+Initial Implementation: SSIS SEL program
 ```{r}
-cost.per.student = 1.5
-num.students = 5500
+cost.per.class = 268/ 25
+classesYearTwo = 930 + 805
+classesYearThree = classesYearTwo + 801
+ssisYearTwo = cost.per.class*classesYearTwo
+ssisYearThree = ssisYearTwo + cost.per.class*classesYearThree
+ssisYearFour = ssisYearThree
+total.ssis = round(ssisYearTwo+ssisYearThree+ssisYearFour);total.ssis
+```
+classesYearTwo = We will only be serving about 
+
+This is an operating expensive 
+
+Aperture education
+```{r}
+preK = 288; k = 798; first = 854; second = 782; third = 828; fourth = 840; fifth  = 836; sixth = 755; seventh = 805; eighth  = 801; ninth = 930; tenth = 923; eleventh = 848; twelfth = 824
+
+cost.per.student = 3.5
+
+enrollTwo = preK + k + first
+
+totalYearTwo = enrollTwo*cost.per.student
+
+enrollThree = enrollTwo + second + third + fourth + tenth
+
+totalYearThree = enrollThree*cost.per.student
+
+enrollFour = enrollThree + fifth + sixth + eleventh + twelfth
+
+totalYearFour = enrollFour*cost.per.student
+
 years = 4
-total.pan = cost.per.student*num.students*years; total.pan
+total.pan = cost.per.student*enroll*years; total.pan
 ```
+enrollTwo = This will be pre-k through 6th, because we are using the universal screener for all the elementary students.
+
+enrollThree  = enrollTwo + the 10th graders, because SSIS SEL no longer applies to 10th graders.
+
+enrollFour = enrollThree + the 11th and 12th graders, because there stuff is being rolled out.
+
 This is an operating expensive need to get one year total 
 
-
-Interventionists (Tier 2 and 3 support)
+Coaches elementary
 ```{r}
-num.students = .20*1100
-hours = 30
-cost.staff = 20
-total.interven = num.students*hours*cost.staff; total.interven
+num.staff = 14*8*2 
+num.hours.coach = num.staff*20
+cost.staff = round((55859/(52*40)))
+total.coel = num.hours.coach*cost.staff; total.coel
 ```
-num.students = number of students that will need to served
-
-Assuming that we eventually serve 20% of the population with intensive services at least once.
 
 
-This is an operating expensive need to get one year total 
+num.classes = There are 14 elementary schools with grades Pre-K through 6th and about two teachers per grade
+
+num.hours = This is the number of hours each each coach will spend training so hour per month training and one hour per month
+
+Coaches for staff training from coaches for middle and high school
+
+Total Coaching for middle and high staff: $33,750
+```{r}
+num.staff.mid = 15
+num.staff.high = 30
+numberHoursCoaching = 20
+cost.staff = round((55859/(52*40)))
+
+yearTwoCosts = (num.staff.mid+num.staff.high)*numberHoursCoaching*cost.staff
+yearThreeCosts = (num.staff.mid+num.staff.high)*numberHoursCoaching*cost.staff
+yearFourCosts = (num.staff.high*2)*numberHoursCoaching*cost.staff
+
+```
+Strong Teens Book
+```{r}
+book = 32
+```
+Only need one book, because the SEL coordinator will create trainings from the book.
+
+Divide the num.hours.coach by three, because you want to estimate the hours over three years for the budget.
+
+cost.staff = http://www1.salary.com/IN/Social-Worker-MSW-salary.html 
+
+total.comh = Need to divide total.comh by three, because we need to estimate the yearly cost, 
+
 
 Evaluation
 ```{r}
+focusGroups = 5
+outputAnalyses = 1
+outcomeAnalyses = 1
+finalReports = 1
 
+hours = (focusGroups)*4+ (outputAnalyses+outcomeAnalyses+finalReports)*15
+costStaff = 15
+overSight = 5000
+oneYearEval = hours*costStaff +(overSight); totalEval
 ```
+
+
 PARCS in conjunction with CEEP with provide the first two years of the evaluation for free and then CEEP will pick up the cost after the first two years.
 
-Total Cost
+outputAnalyses = Analyses related to the outputs that will be measured
+
+hours = We anticpate about 10 hours for each project
+
+overSight = For John Hitchcock to review and oversee the evaluation each year. 
+
+Total Cost for Building Business Skills for the Future Program
+Total Cost: $1,042,348
 ```{r}
-data.frame()
+totalCosts = data.frame(total.con, total.town, total.climate, total.focus, total.teams, total.it, total.coel, total.comh, total.selcor, total.ssis, total.pan, total.interven, totalEval, total.trel, total.trmh)
+totalCostsSum = rowSums(totalCosts); totalCostsSum
 ```
+PARCS
+```{r}
+students = 2
+weeks = 32
+hours = 20
+wage = 32.88
+studentYearly = round(students*weeks*hours*wage)
+
+rebecca = round(43*15*52)
+
+anna = 70000
+matt = 30000
 
 
+```
+2 students *32 weeks in the college school year *20 hours per week *4 years of implementation grant =  5,120 total hours
+wage = http://www.healthcarewages.org/school-psychologist-salary/states/
+
+MCCSC Staff Support
+```{r}
+sc = 20
+scSalary = 47255
+sw = 17
+swSalary = 55859
+sp = 5.6
+spSalary = 32.88*52*40
+bs = 2
+bsSalary = 33862
+perct = .05
+allStaff = round((sc*scSalary+sw*swSalary+sc*scSalary+bs*bsSalary)*perct)
+
+
+
+```
+20 Master’s level school counselors 1 for every 500 students
+	17 social workers  1: for every 647 students
+	5.6 school psychologists 1 for every 1964 students
+2 Behavior specialists	
+scSalary = http://www.school-counselor.org/indiana-school-counselor.html#context/api/listings/prefilter
+
+bsSalary = https://www.glassdoor.com/Salaries/behavior-specialist-salary-SRCH_KO0,19.htm
 
