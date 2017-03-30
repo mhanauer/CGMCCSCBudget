@@ -189,16 +189,25 @@ numFGS = There are four stakeholder groups and we will conduct 6 focus groups wi
 food = two pizzas at $15 a piece
 
 
-Installation - Management: School based implementation teams stipends
+Installation - Management: Implementation teams stipends
 
 ```{r}
-num.staff = 7
-schools = 6
+num.staff = 5
+schools = 19
 hours = 9*3
 cost.staff = 20
-years = 4
-total.teams = num.staff*schools*hours*cost.staff*years; total.teams
+total.teams = num.staff*schools*hours*cost.staff; total.teams
 ```
+Second Step
+```{r}
+kFifth= 2259/6
+classes = 390
+totalSS = kFifth*classes
+```
+kFifth = k through fifth comes in a bundle costing $2,259.  So I divide that by 6, because there are 6 grades included in the package
+
+I am going to assume that if we order the bundle, we can get the sixth grade included at the price
+
 Need to provide stipends to staff that are on the school and district teams
 
 9 comes from the number of months
@@ -207,10 +216,10 @@ schools = number of schools that will receive the stipends five three middle and
 
 Installation - Management: Stipends for staff training from
 ```{r}
-yearOneStaff = (482+380) / 3
+staff = 482+380
 cost = 20
 hours = 4
-totalYearOne = round(yearOneStaff*cost*hours)
+totalStip = round(staff*cost*hours)
 ```
 There are 715 general education teachers at MCCSC.  Given that we are rolling out the program to approximently 1/3 of the teacher each year. 
 
@@ -240,7 +249,7 @@ classesYearTwo = We will only be serving about
 
 This is an operating expensive 
 
-Aperture education
+Aimsweb Behavior
 ```{r}
 preK = 288; k = 798; first = 854; second = 782; third = 828; fourth = 840; fifth  = 836; sixth = 755; seventh = 805; eighth  = 801; ninth = 930; tenth = 923; eleventh = 848; twelfth = 824
 
@@ -307,12 +316,6 @@ hours = We anticpate about 10 hours for each project
 
 overSight = For John Hitchcock to review and oversee the evaluation each year. 
 
-Total Cost for Building Business Skills for the Future Program
-Total Cost: $1,042,348
-```{r}
-totalCosts = data.frame(total.con, total.town, total.climate, total.focus, total.teams, total.it, total.coel, total.comh, total.selcor, total.ssis, total.pan, total.interven, totalEval, total.trel, total.trmh)
-totalCostsSum = rowSums(totalCosts); totalCostsSum
-```
 PARCS
 ```{r}
 students = 2
