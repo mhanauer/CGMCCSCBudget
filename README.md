@@ -16,7 +16,7 @@ Medicaid MCCSC
 Total Medcidad Reimbursements = $569,026
 ```{r}
 med = 610.91
-perct = .16*.25*.75
+perct = .16*.15
 preK = 288; k = 798; first = 854; second = 782; third = 828; fourth = 840; fifth  = 836; sixth = 755; seventh = 805; eighth  = 801; ninth = 930; tenth = 923; eleventh = 848; twelfth = 824 
 enrollTwo = round(preK + k + first + seventh + ninth)
 enrollThree = round(enrollTwo + second + third + fourth + eighth + tenth)
