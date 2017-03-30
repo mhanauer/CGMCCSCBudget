@@ -18,17 +18,19 @@ Total Medcidad Reimbursements = $569,026
 med = 610.91
 perct = .16*.25*.75
 preK = 288; k = 798; first = 854; second = 782; third = 828; fourth = 840; fifth  = 836; sixth = 755; seventh = 805; eighth  = 801; ninth = 930; tenth = 923; eleventh = 848; twelfth = 824 
-enrollTwo = round(288 + 798 + 854 + 782 + 828 + 840 + 836 + 755 + 805 + 930)
-enrollThree = round(enrollTwo + 801 + 923)
-enrollFour = round(enrollThree + 848 + 824)
-yearTwo = round(perct*enrollTwo*med)
-yearThree = round(perct*enrollThree*med)
-yearFour = round(perct*enrollFour*med)
+enrollTwo = round(preK + k + first + seventh + ninth)
+enrollThree = round(enrollTwo + second + third + fourth + eighth + tenth)
+enrollFour = round(enrollThree + fifth + sixth + eleventh + twelfth)
+yearTwo = round(round(perct*enrollTwo)*med)
+yearThree = round(round(perct*enrollThree)*med)
+yearFour = round(round(perct*enrollFour)*med)
 total = round(yearTwo + yearThree + yearFour)
 
 # https://eddataexpress.ed.gov/data-element-explorer.cfm/tab/map/deid/5/
 # https://compass.doe.in.gov/dashboard/enrollment.aspx?type=corp&id=5740
 ```
+You added the round around perct and enrollment to make the numbers match the budget narrative.
+
 med = The amount of extra unrestricted funds that a district receives per student.
 
 iep =  1752 / 10925; iep = https://nces.ed.gov/ccd/districtsearch/district_detail.asp?Search=1&details=1&City=Bloomington&State=18&DistrictType=1&DistrictType=2&DistrictType=3&DistrictType=4&DistrictType=5&DistrictType=6&DistrictType=7&DistrictType=8&NumOfStudentsRange=more&NumOfSchoolsRange=more&ID2=1800630
@@ -164,14 +166,27 @@ years = only have a climate survey as a method for evaluating buy in.  So only t
 Installation - Buy in: interviews / focus groups
 Total cost of focus groups = $1,500
 ```{r}
-numFGs = 10
+numFGs = 4*6
 hours.fg = 4
-years = 4
 cost.staff = 15
-yearlyCost = numFGs*hours.fg*cost.staff
-total.focus =  numFGs*hours.fg*cost.staff*years; total.focus 
-```
 
+
+fgCosts = numFGs*hours.fg*cost.staff
+
+analHours = 10
+analCosts = analHours*numFGs*cost.staff
+
+trans = 2*60*numFGs
+
+food = 30
+foodCosts = food*numFGs
+
+years = 3
+
+total.focus = (fgCosts+analCosts+trans+foodCosts) *years; total.focus 
+```
+numFGS = There are four stakeholder groups and we will conduct 6 focus groups with each stakeholder. 
+food = two pizzas at $15 a piece
 
 
 Installation - Management: School based implementation teams stipends
@@ -190,42 +205,15 @@ Need to provide stipends to staff that are on the school and district teams
 
 schools = number of schools that will receive the stipends five three middle and two high schools
 
-Installation - Management: Stipends for staff training from coaches for elementary
+Installation - Management: Stipends for staff training from
 ```{r}
-num.staff = 14*8*2 
-num.hours.yearly.train = 4*num.staff
-num.hours.coach = num.staff*9
-cost.staff = 15
-total.trel = num.hours.coach*cost.staff + num.hours.yearly.train*cost.staff; total.trel
+yearOneStaff = (482+380) / 3
+cost = 20
+hours = 4
+totalYearOne = round(yearOneStaff*cost*hours)
 ```
-num.classes = There are 14 elementary schools with grades Pre-K through 6th and about two teachers per grade
+There are 715 general education teachers at MCCSC.  Given that we are rolling out the program to approximently 1/3 of the teacher each year. 
 
-num.hours.yearly.train = Each staff will receive four hours of training over four years as a their yearly training.
-
-num.hours = This is the number of hours each staff member will spend in training so one hour per month
-
-To get the cost of yearly stipends for trainings, add the second half of the total equations for ele and mid and high.
-
-Installation - Management: Stipends for staff training from coaches for middle and high school
-```{r}
-highStaff = 20
-middleStaff = 15
-initial = 4
-cost = 15
-
-yearTwoStaff = highStaff+middleStaff
-totalYearTwoPD = yearTwoStaff*initial*cost
-  
-yearThreeStaff = highStaff+middleStaff
-totalYearThreePD = yearThreeStaff*initial*cost
-
-yearFourStaff = highStaff*2
-totalYearFourPD = yearFourStaff*initial*cost
-
-
-```
-num.staff.mid = There are about 15 teachers who would receive training across 3 middle schools
-num.staff.high = There are about 30 (twice as many grades) teachers who would receive training across 2 middle schools
 
 SEL Coordinator
 Total SEL Coordinator: $260,000
@@ -238,14 +226,16 @@ total.selcor = cost*years; total.selcor
 
 Initial Implementation: SSIS SEL program
 ```{r}
-cost.per.class = 268/ 25
+cost.per.student = 268/ 25
 classesYearTwo = 930 + 805
 classesYearThree = classesYearTwo + 801
 ssisYearTwo = cost.per.class*classesYearTwo
-ssisYearThree = ssisYearTwo + cost.per.class*classesYearThree
+ssisYearThree = ssisYearTwo + cost.per.student *classesYearThree
 ssisYearFour = ssisYearThree
 total.ssis = round(ssisYearTwo+ssisYearThree+ssisYearFour);total.ssis
 ```
+cost.per.student = program costs $268 per class and it serves up to 25 students.
+
 classesYearTwo = We will only be serving about 
 
 This is an operating expensive 
@@ -254,7 +244,7 @@ Aperture education
 ```{r}
 preK = 288; k = 798; first = 854; second = 782; third = 828; fourth = 840; fifth  = 836; sixth = 755; seventh = 805; eighth  = 801; ninth = 930; tenth = 923; eleventh = 848; twelfth = 824
 
-cost.per.student = 3.5
+cost.per.student = 1
 
 enrollTwo = preK + k + first
 totalYearTwo = enrollTwo*cost.per.student
@@ -265,8 +255,6 @@ totalYearThree = enrollThree*cost.per.student
 enrollFour = enrollThree + fifth + sixth + eleventh + twelfth
 totalYearFour = enrollFour*cost.per.student
 
-years = 4
-total.pan = cost.per.student*enroll*years; total.pan
 ```
 enrollTwo = This will be pre-k through 6th, because we are using the universal screener for all the elementary students.
 
@@ -276,35 +264,6 @@ enrollFour = enrollThree + the 11th and 12th graders, because there stuff is bei
 
 This is an operating expensive need to get one year total 
 
-Coaches 
-```{r}
-teachers = 50
-cost = 27
-hours = 20
-totalCosts = teachers*cost*hours
-
-
-```
-yearTwoCoaches = assuming two teachers per grade for elementary with 14 schools so 21 here and 5 teachers for middle schools so 10 here totaling 31
-
-num.classes = There are 14 elementary schools with grades Pre-K through 6th and about two teachers per grade
-
-num.hours = This is the number of hours each each coach will spend training so hour per month training and one hour per month
-
-Coaches for staff training from coaches for middle and high school
-
-Total Coaching for middle and high staff: $33,750
-```{r}
-num.staff.mid = 15
-num.staff.high = 30
-numberHoursCoaching = 20
-cost.staff = round((55859/(52*40)))
-
-yearTwoCosts = (num.staff.mid+num.staff.high)*numberHoursCoaching*cost.staff
-yearThreeCosts = (num.staff.mid+num.staff.high)*numberHoursCoaching*cost.staff
-yearFourCosts = (num.staff.high*2)*numberHoursCoaching*cost.staff
-
-```
 Strong Teens Book
 ```{r}
 book = 32
