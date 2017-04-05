@@ -12,7 +12,7 @@ Total Cost for Building Business Skills for the Future Program
 Total Cost: $1,042,348
 
 
-Medicaid MCCSC
+Medicaid MCCSC Plan 1 
 Total Medcidad Reimbursements = $569,026
 ```{r}
 med = 610.91
@@ -60,6 +60,71 @@ yearThree = Same as yearTwo, but with the numbers for year three
 yearFour = Same yearThree, but with the numbers for year four
 
 total = Is the four total amount we can expect to see in Medicaid rembursements
+
+
+Medicaid PLan 2
+```{r}
+
+#Assuming that they stay on Medicaid and that we are eventually screening everyone 
+medicaid2017 = 51213.02*2
+medicaid2017Half = 51213.02
+
+yearTwoMed = medicaid2017Half/3
+yearThreeMed = yearTwoMed + medicaid2017Half/3
+yearFourMed = yearThreeMed + medicaid2017Half/3
+
+totalMedicaid = sum(yearTwoMed, yearThreeMed, yearThreeMed) 
+
+#Assuming that they are off of Medicaid after a year screening everyone 
+medicaid2017 = 51213.02*2
+medicaid2017Half = 51213.02
+
+yearlyMed =medicaid2017Half/3
+
+totalMedicaid = yearlyMed*3
+
+#Assuming that they stay on Medicaid throughout the grant and that we don't screen 10-12 graders.
+preK = 288; k = 798; first = 854; second = 782; third = 828; fourth = 840; fifth  = 836; sixth = 755; seventh = 805; eighth  = 801; ninth = 930; tenth = 923; eleventh = 848; twelfth = 824 
+
+totalEnroll = 11200
+
+yearTwoEnroll = (preK + k + first  +  sixth + ninth) / totalEnroll
+yearThreeEnroll = (second + third + fourth + tenth) / totalEnroll
+yearFourEnroll = (fifth + eleventh) / totalEnroll
+
+yearTwoMed = yearTwoEnroll*medicaid2017Half
+yearThreeMed = yearTwoMed + yearThreeEnroll*medicaid2017Half
+yearFourMed =  yearThreeMed + yearFourEnroll*medicaid2017Half
+
+totalMedicaid = sum(yearTwoMed, yearThreeMed, yearThreeMed) 
+
+
+#Assuming that they do not stay on Medicaid throughout the grant and that we don't screen 10-12 graders.
+preK = 288; k = 798; first = 854; second = 782; third = 828; fourth = 840; fifth  = 836; sixth = 755; seventh = 805; eighth  = 801; ninth = 930; tenth = 923; eleventh = 848; twelfth = 824 
+
+totalEnroll = 11200
+
+yearTwoEnroll = (preK + k + first  +  sixth + ninth) / totalEnroll
+yearThreeEnroll = (second + third + fourth + tenth) / totalEnroll
+yearFourEnroll = (fifth + eleventh) / totalEnroll
+
+yearTwoMed = yearTwoEnroll*medicaid2017Half
+yearThreeMed = yearThreeEnroll*medicaid2017Half
+yearFourMed =  yearFourEnroll*medicaid2017Half
+
+totalMedicaid = sum(yearTwoMed, yearThreeMed, yearThreeMed) 
+```
+#Assuming that they stay on Medicaid and that we are eventually screening everyone 
+
+Medicaid revenue was $51,213.02 in the first half of 2016-2017 school year.  I am assuming it will be the same in the second half therefore it is doubled.
+
+If we are rolling out the program across the district and expecting that we have caught about 50% of the needy students, then we can assume that we will bring in half that $51213.02 each year.  I am assuming the kids are staying on Medicaid so I am taking the total increase from the year before and addint to medicaid/3, because that is the increase we will see in the next year.
+
+#Assuming that they are off of Medicaid after a year screening everyone 
+Here we are assuming that new kids are off after one year so the increase is just medicaid2017Half/3 each year. 
+
+#Assuming that they stay on Medicaid throughout the grant and that we don't screen 10-12 graders.
+First we need to get the percentage of students in each roll out so that we can estimate what percentage of the population will receive the programs each year.  Then we can take that percentage of times the increase which is medicaid2017Half/3.  We need the percentage of the total population, because we are no longer serving the whole district and medicaid2017Half/3 assuming that the whole district is divided by 1/3.  So we need to take medicaid2017Half * the percentage of the population that is actually being served.  Because we are assuming that students remain in Medicaid in this model we add the previous year to current amount.     
 
 Interventionists (Tier 2 and 3 support)
 Total Interventionists costs: $405,506.2
